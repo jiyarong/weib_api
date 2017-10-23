@@ -1,0 +1,2 @@
+class CardTrigger < ApplicationRecord
+end
