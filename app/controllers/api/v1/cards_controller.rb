@@ -44,6 +44,7 @@ class Api::V1::CardsController < ApplicationController
     @card.new_product = new_product
 
     if params[:trigger].present?
+      @card.card_triggers = []
       params[:trigger].each do |tr_name|
         tr = Trigger.find_or_initialize_by(raw_name: tr_name)
         @card.triggers << tr
