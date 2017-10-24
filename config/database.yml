@@ -6,5 +6,5 @@ development:
   database: weib_api_dev
   pool: 5
   username: root
-  password: ad66544970123
+  password: rcc123
   host: 127.0.0.1

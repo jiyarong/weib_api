@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration[5.1]
       t.string :raw_name #原始卡名
       t.string :name #卡名
       t.string :card_code #卡号
-      t.integer :rarity #稀有度
+      t.string :rarity_text #稀有度
       t.integer :card_type #卡片种类
       t.integer :product_id #产品类别
       t.integer :new_product_id #新产品类别
@@ -25,7 +25,7 @@ class CreateCards < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :cards, :rarity
+    #add_index :cards, :rarity
     add_index :cards, :card_type
     add_index :cards, :product_id
     add_index :cards, :new_product_id
