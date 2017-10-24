@@ -1,6 +1,6 @@
 appid = "20171024000090599"
 password = "kme8uQLl9gljkgfqtEke"
-salt = 123
+salt = "123"
 
 i = 1
 Card.find_in_batches do |cards_group|
