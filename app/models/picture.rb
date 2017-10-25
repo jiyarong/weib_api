@@ -4,6 +4,10 @@ class Picture < ApplicationRecord
   after_create :download_remote_picture
   before_create :write_local_url
 
+  def http_url
+    self.local_url.gsub(Rails.root.to_s + "/public", "")
+  end
+
   private
   def write_local_url
     dir = File.join(Rails.root, "/public/ws_pictures", "/#{self.card.id/1000}")

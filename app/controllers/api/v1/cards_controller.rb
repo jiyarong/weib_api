@@ -1,4 +1,9 @@
 class Api::V1::CardsController < ApplicationController
+  def index
+    params[:page] ||= 1
+    @cards = Card.page(params[:page]).per(30).includes(:product, :new_product, :picture, :triggers)
+    render json: @cards, each_serializer: CardListSerializer, meta: @cards.pagination_info
+  end
 
   # t.string :raw_name #原始卡名
   # t.string :name #卡名

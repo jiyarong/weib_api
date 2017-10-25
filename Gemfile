@@ -17,6 +17,10 @@ gem 'mysql2'
 gem 'enumerize'
 gem 'sidekiq'
 gem 'rest-client'
+
+gem 'kaminari-activerecord'
+
+gem 'active_model_serializers'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
