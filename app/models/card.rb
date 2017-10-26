@@ -5,15 +5,13 @@ class Card < ApplicationRecord
   has_many :triggers, class_name: "Trigger",  through: "card_triggers", dependent: :delete_all
   has_one :picture, dependent: :destroy
 
-  def product_name
-    product.raw_name
-  end
+  COLOR = {red: 1, yellow: 2, blue: 3, green: 4}
+  CARD_CODE = {'人物' => 1, '场景' => 2, '高潮' => 3}
+  WING_TYPE= {'白' => 0, '黑' => 1}
 
-  def new_product_name
-    new_product.raw_name
-  end
+  extend Enumerize
+  enumerize :color, in: COLOR
+  enumerize :card_type, in: CARD_CODE
+  enumerize :wing_type, in: WING_TYPE
 
-  def picture_url
-    picture.local_url
-  end
 end

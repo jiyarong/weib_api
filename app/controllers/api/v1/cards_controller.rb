@@ -2,23 +2,18 @@ class Api::V1::CardsController < ApplicationController
   def index
     params[:page] ||= 1
 
+    #对triggers等一系列字符串进行处理,支持`,`隔开的多选
+    params[:triggers_id_in] = params[:triggers_id_in].split(",") if params[:triggers_id_in] && params[:triggers_id_in].is_a?(String)
+    params[:product_id_in] = params[:product_id_in].split(",") if params[:product_id_in] && params[:product_id_in].is_a?(String)
+    params[:new_product_id_in] = params[:new_product_id_in].split(",") if params[:new_product_id_in] && params[:new_product_id_in].is_a?(String)
+
     @cards = Card.ransack(params).result.page(params[:page]).per(30).includes(:product, :new_product, :picture, :triggers)
-    # if params[:name_cont].present?
-    #   @cards = @cards.where("name like '%#{params[:name_cont]}%'")
-    # end
-    #
-    # if params[:card_code_cont].present?
-    #   @cards = @cards.where("card_code like '%#{params[:card_code_cont]}%'")
-    # end
-    #
-    # if params[:content_cont].present?
-    #   @cards = @cards.where("content like '%#{params[:content_cont]}%'")
-    # end
-    #
-    # if params[:feature_cont].present?
-    #   @cards = @cards.where("feature like '%#{params[:feature_cont]}%'")
-    # end
     render json: @cards, each_serializer: CardListSerializer, meta: @cards.pagination_info
+  end
+
+  def show
+    @card = Card.find(params[:id])
+    render json: @card
   end
 
   # t.string :raw_name #原始卡名
