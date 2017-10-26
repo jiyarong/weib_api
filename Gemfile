@@ -17,6 +17,7 @@ gem 'mysql2'
 gem 'enumerize'
 gem 'sidekiq'
 gem 'rest-client'
+gem 'ransack'
 
 gem 'kaminari-activerecord'
 

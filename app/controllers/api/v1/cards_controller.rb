@@ -1,22 +1,23 @@
 class Api::V1::CardsController < ApplicationController
   def index
     params[:page] ||= 1
-    @cards = Card.page(params[:page]).per(30).includes(:product, :new_product, :picture, :triggers)
-    if params[:name_cont].present?
-      @cards = @cards.where("name like '%#{params[:name_cont]}%'")
-    end
 
-    if params[:card_code_cont].present?
-      @cards = @cards.where("card_code like '%#{params[:card_code_cont]}%'")
-    end
-
-    if params[:content_cont].present?
-      @cards = @cards.where("content like '%#{params[:content_cont]}%'")
-    end
-
-    if params[:feature_cont].present?
-      @cards = @cards.where("feature like '%#{params[:feature_cont]}%'")
-    end
+    @cards = Card.ransack(params).result.page(params[:page]).per(30).includes(:product, :new_product, :picture, :triggers)
+    # if params[:name_cont].present?
+    #   @cards = @cards.where("name like '%#{params[:name_cont]}%'")
+    # end
+    #
+    # if params[:card_code_cont].present?
+    #   @cards = @cards.where("card_code like '%#{params[:card_code_cont]}%'")
+    # end
+    #
+    # if params[:content_cont].present?
+    #   @cards = @cards.where("content like '%#{params[:content_cont]}%'")
+    # end
+    #
+    # if params[:feature_cont].present?
+    #   @cards = @cards.where("feature like '%#{params[:feature_cont]}%'")
+    # end
     render json: @cards, each_serializer: CardListSerializer, meta: @cards.pagination_info
   end
 
