@@ -7,5 +7,8 @@ Rails.application.routes.draw do
       resources :triggers
     end
   end
+
+  match '/api/v1/cards/:id', :controller => 'option_configs', :action => 'options', :via => :options
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

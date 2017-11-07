@@ -5,5 +5,6 @@ class ApplicationController < ActionController::API
 
   def set_response
     response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE'
   end
 end

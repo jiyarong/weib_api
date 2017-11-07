@@ -78,4 +78,11 @@ class Api::V1::CardsController < ApplicationController
 
     render json: {success: @card.save}
   end
+
+  #对卡片进行更改,目前只能更改翻译后的效果
+  def update
+    @card = Card.find(params[:id])
+    @card.content = params[:content]
+    render json: {success: @card.save}
+  end
 end
